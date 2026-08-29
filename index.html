@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Book</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- Hamburger menu button -->
+  <button class="menu-btn" id="menuBtn" aria-label="Open contents menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="book" id="book">
+    <div class="book-cover left"></div>
+    <div class="book-cover right"></div>
+    <div class="spine"></div>
+
+    <!-- Visible before the first page turns / after the last page turns -->
+    <div class="endpaper left">
+      <img src="assets/Simon.png" alt="Simon Checkout">
+      <h2></h2>
+      <img src="assets/Simon2.png" alt="Simon Owns">
+    </div>
+    <div class="endpaper right">
+      <div class="plate"><p>&mdash; fin &mdash;</p></div>
+    </div>
+
+    <!-- The engine (script.js) builds the flip-book here from #content-source -->
+    <div class="pages" id="pages"></div>
+  </div>
+
+  <!-- Decorative hints only — clicking the book itself (see script.js) is
+       what actually turns the page, so links/scrolling inside a page still work -->
+  <span class="corner-hint left">&#8249;</span>
+  <span class="corner-hint right">&#8250;</span>
+
+  <button class="arrow-btn prev" id="prevBtn" aria-label="Previous page">&#8249;</button>
+  <button class="arrow-btn next" id="nextBtn" aria-label="Next page">&#8250;</button>
+
+  <div class="page-indicator" id="pageIndicator"></div>
+</div>
+
+<!-- Hamburger drawer -->
+<div class="scrim" id="scrim"></div>
+<nav class="drawer" id="drawer">
+  <h2>Contents</h2>
+  <p class="drawer-sub">jump to any page</p>
+  <ul class="drawer-list" id="drawerList"></ul>
+</nav>
+
+
+<!-- =========================================================================
+     CONTENT SOURCE — edit everything below this line to change the book.
+
+     Each  <section class="page">  becomes one page, in the order written.
+     Pages are automatically paired two-at-a-time into physical "leaves"
+     (a front / right-hand page and a back / left-hand page), exactly like
+     a real printed book — so always keep an EVEN number of pages, or the
+     engine will silently add one blank page at the end for you.
+
+     Attributes:
+       id              required if the page should be reachable from the
+                       Table of Contents or the menu (used for jumping to it)
+       data-title      text shown in the Table of Contents / menu.
+                       Omit this (or use data-no-toc) to leave a page out
+                       of the listing — e.g. the Contents page itself.
+       data-section    short running-head label shown in the page footer
+                       (e.g. "CHAPTER ONE"). Optional.
+
+     Page numbers are calculated automatically from page order — never
+     type a page number yourself.
+
+     Inside <div class="page-body"> you can use plain HTML, plus these
+     helper classes:
+       .page-eyebrow   small bold label above the title      (Lexend)
+       .page-title     the big page heading                  (Girassol)
+       .handwritten    handwritten-style note or annotation   (Rock Salt)
+       .callout        a highlighted box for tips/asides
+       .caption        small caption text under an image
+       .divider        a thin horizontal rule
+     Body paragraphs, lists and headings use Libertinus Serif automatically.
+     ========================================================================= -->
+<div id="content-source">
+
+  <!-- PAGE 1 — Table of Contents (front of leaf 1) -->
+  <section class="page" id="toc" data-no-toc data-section="CONTENTS">
+    <div class="page-body">
+
+      <!-- Masthead — edit this block directly, it's just page content -->
+      <div class="toc-masthead">
+        <div class="toc-volume">
+          <p class="toc-brand-drafting">Volume</p>
+          <p class="toc-duck">Duck</p>
+        </div>
+        <div class="toc-brand">
+          <span class="toc-unofficial">Unofficial</span>
+          <span class="toc-brand-drafting">Drafting</span>
+          <h1 class="toc-brand-title">STRATEGY</h1>
+          <p class="toc-brand-sub">Architectural Digest Volume</p>
+        </div>
+        <div class="toc-brand-drafting">SEPTEMBER ISSUE</div>
+      </div>
+
+      <h2 class="features-heading">Features</h2>
+      <ul class="toc-list" data-toc-list></ul>
+    </div>
+  </section>
+
+  <!-- PAGE 2 — Welcome (back of leaf 1) -->
+  <section class="page" id="welcome" data-title="How This Book Works" data-subtitle="by the Editor" data-section="WELCOME">
+    <div class="page-body">
+      <p class="page-eyebrow">Before You Begin</p>
+      <h1 class="page-title">How This Book Works</h1>
+      <p>Click the right-hand page to turn forward, and the left-hand page to turn back. The pages curl in three dimensions as they turn &mdash; try it now.</p>
+      <p>Your scroll wheel and the arrow keys work too, and on a touchscreen you can tap either side of the spread. The <strong>&#9776;</strong> button in the corner opens a menu that jumps straight to any page.</p>
+      <p class="handwritten">psst &mdash; the table of contents on the page before this one is clickable too.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 3 — Getting started (front of leaf 2) -->
+  <section class="page" id="getting-started" data-title="Adding a New Page" data-subtitle="Copy, Paste, Edit" data-section="CHAPTER I">
+    <div class="page-body">
+      <p class="page-eyebrow">Chapter One</p>
+      <h1 class="page-title">Adding a New Page</h1>
+      <p>Open <code>index.html</code> and find the <code>#content-source</code> block near the bottom. Every page is one <code>&lt;section class="page"&gt;</code> &mdash; copy one, paste it where you'd like the new page to appear, and edit the text inside.</p>
+      <h3>A minimal page looks like this</h3>
+      <div class="callout">
+        &lt;section class="page" id="my-page" data-title="My Page Title"&gt;<br>
+        &nbsp;&nbsp;&lt;div class="page-body"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1 class="page-title"&gt;My Page Title&lt;/h1&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Your text here.&lt;/p&gt;<br>
+        &nbsp;&nbsp;&lt;/div&gt;<br>
+        &lt;/section&gt;
+      </div>
+      <p>The page number and its entry in the Table of Contents both appear automatically &mdash; you never type a number.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 4 — Images (back of leaf 2) -->
+  <section class="page" id="images" data-title="Adding Images" data-subtitle="A Folder And A Path" data-section="CHAPTER I">
+    <div class="page-body">
+      <p class="page-eyebrow">Chapter One, Continued</p>
+      <h1 class="page-title">Adding Images</h1>
+      <img src="https://picsum.photos/seed/bookpage/800/460" alt="Placeholder illustration">
+      <p class="caption">Replace this with your own file, e.g. <code>&lt;img src="images/your-photo.jpg"&gt;</code></p>
+      <p>Keep image files in an <code>images/</code> folder next to <code>index.html</code> and reference them with a relative path. Images automatically scale to fit the page width.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 5 — Organizing (front of leaf 3) -->
+  <section class="page" id="organizing" data-title="Organizing Sections" data-subtitle="Order and Chapters" data-section="CHAPTER II">
+    <div class="page-body">
+      <p class="page-eyebrow">Chapter Two</p>
+      <h1 class="page-title">Organizing Sections</h1>
+      <p>Pages appear in the order you write them &mdash; to reorder the book, just move a <code>&lt;section&gt;</code> block up or down in the file.</p>
+      <p>Give related pages the same <code>data-section</code> label (shown in small print at the foot of each page) to group them into chapters, the way "Chapter One" appears on both pages 3 and 4 of this book.</p>
+      <hr class="divider">
+      <p>To leave a page out of the Contents list entirely &mdash; useful for a title page or a colophon &mdash; add <code>data-no-toc</code> to its <code>&lt;section&gt;</code> tag instead of <code>data-title</code>.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 6 — Reference (back of leaf 3) -->
+  <section class="page" id="reference" data-title="Quick Reference" data-subtitle="Every Helper Class" data-section="CHAPTER II">
+    <div class="page-body">
+      <p class="page-eyebrow">Chapter Two, Continued</p>
+      <h1 class="page-title">Quick Reference</h1>
+      <ul>
+        <li><strong>.page-eyebrow</strong> &mdash; small label above a title</li>
+        <li><strong>.page-title</strong> &mdash; the big heading</li>
+        <li><strong>.handwritten</strong> &mdash; a scrawled note</li>
+        <li><strong>.callout</strong> &mdash; a highlighted box</li>
+        <li><strong>.caption</strong> &mdash; small text under an image</li>
+        <li><strong>.divider</strong> &mdash; a thin horizontal rule</li>
+      </ul>
+      <p>Everything else &mdash; paragraphs, headings, ordered and unordered lists &mdash; is styled automatically.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 7 — Field notes (front of leaf 4) -->
+  <section class="page" id="notes" data-title="Field Notes" data-subtitle="Marginalia" data-section="NOTES">
+    <div class="page-body">
+      <p class="page-eyebrow">Marginalia</p>
+      <h1 class="page-title">Field Notes</h1>
+      <p class="handwritten">remember to swap this for your own content before you publish!</p>
+      <p class="handwritten">the drawer menu is great for a book with lots of chapters.</p>
+      <p class="handwritten">try it on your phone &mdash; it switches to one page at a time.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 8 — Colophon (back of leaf 4) -->
+  <section class="page" id="colophon" data-title="Colophon" data-subtitle="Credits and Thanks" data-section="COLOPHON">
+    <div class="page-body">
+      <p class="page-eyebrow">Last Page</p>
+      <h1 class="page-title">Colophon</h1>
+      <p>Built with plain HTML, CSS and JavaScript &mdash; no build step, so it deploys directly to GitHub Pages. Set in Girassol, Lexend, Libertinus Serif and Rock Salt.</p>
+      <p>See <code>README.md</code> in this project for deployment instructions.</p>
+      <p class="handwritten" style="text-align:center; margin-top: 2em;">&mdash; fin &mdash;</p>
+    </div>
+  </section>
+
+</div>
+<!-- ========================================================================= -->
+
+<script src="script.js"></script>
+</body>
+</html>
