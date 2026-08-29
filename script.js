@@ -182,10 +182,9 @@
   function jumpToPage(id) {
     const target = sourcePages.findIndex((p) => p.id === id);
     if (target === -1) return;
-    const targetLeaf = Math.floor(target / 2);
-    if (targetLeaf === currentLeaf || animating) {
-      if (targetLeaf === currentLeaf) return;
-    }
+    const targetLeaf = Math.ceil(target / 2);
+    if (targetLeaf === currentLeaf) return;
+    if (animating) return;
     const dir = targetLeaf > currentLeaf ? 1 : -1;
     leaves.forEach((l) => l.classList.add("is-jumping"));
 
