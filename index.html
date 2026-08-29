@@ -26,7 +26,7 @@
       <img src="assets/Simon2.png" alt="Simon Owns">
     </div>
     <div class="endpaper right">
-      <div class="plate"><p>&mdash; fin &mdash;</p></div>
+      <img src="assets/Ducts.png" alt="Ducts" style="width: 60%; height: auto;">
     </div>
 
     <!-- The engine (script.js) builds the flip-book here from #content-source -->
@@ -93,8 +93,8 @@
       <!-- Masthead — edit this block directly, it's just page content -->
       <div class="toc-masthead">
         <div class="toc-volume">
-          <p class="toc-brand-drafting">VOLUME</p>
-          <p class="toc-duck">Duck</p>
+          <p class="toc-volume-label">VOLUME</p>
+          <p class="toc-duck">&nbsp;&nbsp;<strong>DUCK</strong></p>
         </div>
         <div class="toc-brand">
           <span class="toc-unofficial">Unofficial</span>
@@ -102,7 +102,7 @@
           <h1 class="toc-brand-title">STRATEGY</h1>
           <p class="toc-brand-sub">Architectural Digest Volume</p>
         </div>
-        <div class="toc-brand-drafting">SEPTEMBER ISSUE</div>
+        <div class="toc-issue">SEPTEMBER ISSUE</div>
       </div>
 
       <h2 class="features-heading">Features</h2>
@@ -110,95 +110,68 @@
     </div>
   </section>
 
-  <!-- PAGE 2 — Welcome (back of leaf 1) -->
-  <section class="page" id="welcome" data-title="How This Book Works" data-subtitle="by the Editor" data-section="WELCOME">
+  <section class="page" id="welcome" data-title="Art of The Draft" data-subtitle="by the Editor" data-section="WELCOME">
     <div class="page-body">
-      <p class="page-eyebrow">Before You Begin</p>
-      <h1 class="page-title">How This Book Works</h1>
-      <p>Click the right-hand page to turn forward, and the left-hand page to turn back. The pages curl in three dimensions as they turn &mdash; try it now.</p>
-      <p>Your scroll wheel and the arrow keys work too, and on a touchscreen you can tap either side of the spread. The <strong>&#9776;</strong> button in the corner opens a menu that jumps straight to any page.</p>
-      <p class="handwritten">psst &mdash; the table of contents on the page before this one is clickable too.</p>
+      <p class="page-eyebrow">Art of The Draft</p>
+      <h1 class="page-title">The World Needs One More Architectural Digest</h1>
+      <p>To both new and seasoned architects, the name Drafting Strategy is synonymous to a bible, a book preaching the gospel of good drafting practices. Yet with the Drafting Studio Press going dark and what I see was too many architects running afowl, I take it to my own flippers to collate important advices that has not yet been covered by the previous five volumes.</p>
+      <p>In this extra-long issue of <strong>"UNOFFICIAL DRAFTING STRATEGY"</strong>, I will bring a collection of important concepts, guidelines and examples to test your understanding against the veterans of drafting.</p>
     </div>
   </section>
 
-  <!-- PAGE 3 — Getting started (front of leaf 2) -->
-  <section class="page" id="getting-started" data-title="Adding a New Page" data-subtitle="Copy, Paste, Edit" data-section="CHAPTER I">
+  <section class="page" id="sode" data-title="Spiral Of Dead Ends" data-subtitle="To Not Waste Doors" data-section="Spiral Of Dead Ends">
     <div class="page-body">
-      <p class="page-eyebrow">Chapter One</p>
-      <h1 class="page-title">Adding a New Page</h1>
-      <p>Open <code>index.html</code> and find the <code>#content-source</code> block near the bottom. Every page is one <code>&lt;section class="page"&gt;</code> &mdash; copy one, paste it where you'd like the new page to appear, and edit the text inside.</p>
-      <h3>A minimal page looks like this</h3>
-      <div class="callout">
-        &lt;section class="page" id="my-page" data-title="My Page Title"&gt;<br>
-        &nbsp;&nbsp;&lt;div class="page-body"&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1 class="page-title"&gt;My Page Title&lt;/h1&gt;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Your text here.&lt;/p&gt;<br>
-        &nbsp;&nbsp;&lt;/div&gt;<br>
-        &lt;/section&gt;
-      </div>
-      <p>The page number and its entry in the Table of Contents both appear automatically &mdash; you never type a number.</p>
+      <p class="page-eyebrow">Spiral Of Dead Ends</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 
-  <!-- PAGE 4 — Images (back of leaf 2) -->
-  <section class="page" id="images" data-title="Adding Images" data-subtitle="A Folder And A Path" data-section="CHAPTER I">
+  <section class="page" id="srb" data-title="Centers of Trade" data-subtitle="Shops and Rooms To Backtrack" data-section="Shops and Rooms To Backtrack">
     <div class="page-body">
-      <p class="page-eyebrow">Chapter One, Continued</p>
-      <h1 class="page-title">Adding Images</h1>
-      <img src="https://picsum.photos/seed/bookpage/800/460" alt="Placeholder illustration">
-      <p class="caption">Replace this with your own file, e.g. <code>&lt;img src="images/your-photo.jpg"&gt;</code></p>
-      <p>Keep image files in an <code>images/</code> folder next to <code>index.html</code> and reference them with a relative path. Images automatically scale to fit the page width.</p>
+      <p class="page-eyebrow">Centers of Trade</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 
-  <!-- PAGE 5 — Organizing (front of leaf 3) -->
-  <section class="page" id="organizing" data-title="Organizing Sections" data-subtitle="Order and Chapters" data-section="CHAPTER II">
+  <section class="page" id="ad" data-title="Active Doors" data-subtitle="Placing Pathways and Dead Ends" data-section="Active Doors">
     <div class="page-body">
-      <p class="page-eyebrow">Chapter Two</p>
-      <h1 class="page-title">Organizing Sections</h1>
-      <p>Pages appear in the order you write them &mdash; to reorder the book, just move a <code>&lt;section&gt;</code> block up or down in the file.</p>
-      <p>Give related pages the same <code>data-section</code> label (shown in small print at the foot of each page) to group them into chapters, the way "Chapter One" appears on both pages 3 and 4 of this book.</p>
-      <hr class="divider">
-      <p>To leave a page out of the Contents list entirely &mdash; useful for a title page or a colophon &mdash; add <code>data-no-toc</code> to its <code>&lt;section&gt;</code> tag instead of <code>data-title</code>.</p>
+      <p class="page-eyebrow">Active Doors</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 
-  <!-- PAGE 6 — Reference (back of leaf 3) -->
-  <section class="page" id="reference" data-title="Quick Reference" data-subtitle="Every Helper Class" data-section="CHAPTER II">
+  <section class="page" id="rpe" data-title="Revisiting Past Editions" data-subtitle="Exploring Past Advice In Depth" data-section="Revisiting Past Editions">
     <div class="page-body">
-      <p class="page-eyebrow">Chapter Two, Continued</p>
-      <h1 class="page-title">Quick Reference</h1>
-      <ul>
-        <li><strong>.page-eyebrow</strong> &mdash; small label above a title</li>
-        <li><strong>.page-title</strong> &mdash; the big heading</li>
-        <li><strong>.handwritten</strong> &mdash; a scrawled note</li>
-        <li><strong>.callout</strong> &mdash; a highlighted box</li>
-        <li><strong>.caption</strong> &mdash; small text under an image</li>
-        <li><strong>.divider</strong> &mdash; a thin horizontal rule</li>
-      </ul>
-      <p>Everything else &mdash; paragraphs, headings, ordered and unordered lists &mdash; is styled automatically.</p>
+      <p class="page-eyebrow">Revisiting Past Editions</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 
-  <!-- PAGE 7 — Field notes (front of leaf 4) -->
-  <section class="page" id="notes" data-title="Field Notes" data-subtitle="Marginalia" data-section="NOTES">
+  <section class="page" id="sd" data-title="Stacking The Deck" data-subtitle="Manipulating Rooms Shown" data-section="Stacking The Deck">
     <div class="page-body">
-      <p class="page-eyebrow">Marginalia</p>
-      <h1 class="page-title">Field Notes</h1>
-      <p class="handwritten">remember to swap this for your own content before you publish!</p>
-      <p class="handwritten">the drawer menu is great for a book with lots of chapters.</p>
-      <p class="handwritten">try it on your phone &mdash; it switches to one page at a time.</p>
+      <p class="page-eyebrow">Stacking The Deck</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 
-  <!-- PAGE 8 — Colophon (back of leaf 4) -->
-  <section class="page" id="colophon" data-title="Colophon" data-subtitle="Credits and Thanks" data-section="COLOPHON">
+  <section class="page" id="kbye" data-title="Knock Before You Enter" data-subtitle="Nuances Around Checking Doors" data-section="Knock Before You Enter">
     <div class="page-body">
-      <p class="page-eyebrow">Last Page</p>
-      <h1 class="page-title">Colophon</h1>
-      <p>Built with plain HTML, CSS and JavaScript &mdash; no build step, so it deploys directly to GitHub Pages. Set in Girassol, Lexend, Libertinus Serif and Rock Salt.</p>
-      <p>See <code>README.md</code> in this project for deployment instructions.</p>
-      <p class="handwritten" style="text-align:center; margin-top: 2em;">&mdash; fin &mdash;</p>
+      <p class="page-eyebrow">Knock Before You Enter</p>
+      <h1 class="page-title">Title</h1>
+    </div>
+  </section>
+
+  <section class="page" id="suyg" data-title="Stepping Up Your Game" data-subtitle="Challenges Worth Trying For" data-section="Stepping Up Your Game">
+    <div class="page-body">
+      <p class="page-eyebrow">Stepping Up Your Game</p>
+      <h1 class="page-title">Title</h1>
+    </div>
+  </section>
+
+  <section class="page" id="wfte" data-title="Word From The Editor" data-subtitle="by the Duck" data-section="Word From The Editor">
+    <div class="page-body">
+      <p class="page-eyebrow">Word From The Editor</p>
+      <h1 class="page-title">Title</h1>
     </div>
   </section>
 

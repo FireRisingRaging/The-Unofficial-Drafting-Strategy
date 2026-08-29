@@ -16,8 +16,8 @@
   --cover-deep:     #16261c;
   --gold:           #c8a24d;
   --gold-soft:      #ddbd7c;
-  --red:            #a3392b;
-  --green:          #3f6b4f;
+  --red:            #990000;
+  --green:          #4d761d;
   --shadow:         rgba(15, 12, 6, 0.55);
 
   /* -- type ------------------------------------------------------------ */
@@ -409,23 +409,26 @@ body{
 /* -- table of contents page: masthead ---------------------------------- */
 
 .toc-masthead{
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 2.1fr 1fr;
-  align-items: end;
+  align-items: baseline;
   gap: 10px;
   margin-bottom: clamp(22px, 4vh, 44px);
 }
 .toc-volume{ text-align: left; }
-.toc-volume-label{
-  font-family: var(--font-head);
+.toc-masthead .toc-volume-label{
+  position: absolute;
+  top: 3.5em;
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.6rem, 0.35vw + 0.42rem, 0.85rem);
+  font-size: clamp(0.6rem, 0.8vw + 0.2rem, 1.3rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink);
   margin: 0;
 }
-.toc-volume-word{
+.toc-masthead .toc-volume-word{
   font-family: var(--font-hand);
   font-size: clamp(1.5rem, 1.7vw + 0.9rem, 2.6rem);
   color: var(--green);
@@ -435,23 +438,34 @@ body{
   transform-origin: left bottom;
 }
 
-.toc-brand{ text-align: center; }
-.toc-unofficial{
+.toc-brand{ text-align: center; position: relative;}
+.toc-masthead .toc-unofficial{
+  position: absolute;
+  top: -1.2em;
+  right: 4%;
+  transform: translateX(-50%) rotate(-12deg);
+  z-index: 2;
   display: inline-block;
   font-family: var(--font-hand);
   color: var(--red);
-  font-size: clamp(1rem, 1.2vw + 0.6rem, 1.7rem);
-  transform: rotate(-6deg);
-  margin-bottom: -4px;
+  font-size: clamp(1.5rem, 1.7vw + 1.1rem, 2.2rem);
 }
-.toc-duck{
+.toc-masthead .toc-duck{
   display: inline-block;
   font-family: var(--font-hand);
   color: var(--green);
-  font-size: clamp(1rem, 1.2vw + 0.6rem, 1.7rem);
-  margin-bottom: -4px;
+  font-size: clamp(0.6rem, 0.8vw + 0.2rem, 1.3rem);
+  font-weight: bold;
 }
-.toc-brand-drafting{
+.toc-masthead .toc-duck strong{
+  position: absolute;
+  top: 4.5em;
+  display: inline-block;
+  transform: scaleY(0.72);
+  transform-origin: center;
+  -webkit-text-stroke: 0.6px var(--green);
+}
+.toc-masthead .toc-brand-drafting{
   display: block;
   font-family: var(--font-display);
   font-style: italic;
@@ -459,7 +473,7 @@ body{
   color: var(--ink);
   margin-bottom: -10px;
 }
-.toc-brand-title{
+.toc-masthead .toc-brand-title{
   margin: 0;
   font-family: var(--font-head);
   font-weight: 700;
@@ -468,7 +482,7 @@ body{
   line-height: 1;
   color: var(--ink);
 }
-.toc-brand-sub{
+.toc-masthead .toc-brand-sub{
   margin-top: 3px;
   font-family: var(--font-body);
   font-style: italic;
@@ -476,11 +490,14 @@ body{
   color: var(--ink-soft);
 }
 
-.toc-issue{
+.toc-masthead .toc-issue{
+  position: absolute;
+  top: 3.5em;
+  left: 80%;
   text-align: right;
-  font-family: var(--font-head);
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.6rem, 0.35vw + 0.42rem, 0.85rem);
+  font-size: clamp(0.6rem, 0.8vw + 0.2rem, 1.3rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink);
@@ -503,7 +520,7 @@ body{
 .toc-list{ list-style: none; margin: 0; padding: 0; }
 .toc-entry{ margin-bottom: clamp(10px, 1.7vh, 18px); cursor: pointer; }
 .toc-title{
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-variant: small-caps;
   font-weight: 700;
   font-size: clamp(1rem, 0.65vw + 0.72rem, 1.5rem);
@@ -518,7 +535,6 @@ body{
 }
 .toc-subtitle{
   font-family: var(--font-body);
-  font-style: italic;
   font-size: clamp(0.85rem, 0.4vw + 0.62rem, 1.15rem);
   color: var(--ink-soft);
   white-space: nowrap;
