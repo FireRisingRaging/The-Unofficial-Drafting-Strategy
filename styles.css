@@ -3,21 +3,22 @@
    Design tokens live at the top. Change these to re-theme the whole book.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&family=Lexend:wght@600;700&family=Girassol&family=Libertinus+Serif:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&family=Lexend:wght@600;700&family=Girassol&family=Libertinus+Serif:ital,wght@0,400;0,600;1,400&family=Alegreya+Sans+SC:wght@800&display=swap');
 
 :root{
   /* -- palette -------------------------------------------------------- */
   --ink:            #2b2419;
-  --ink-soft:       #4a3f30;
+  --ink-soft:       #101010;
   --parchment:      #f3ead9;
   --parchment-alt:  #ece0c8;
   --page-edge:      #d9c9a3;
   --cover:          #223a2c;
   --cover-deep:     #16261c;
-  --gold:           #c8a24d;
+  --gold:           #e69138;
   --gold-soft:      #ddbd7c;
   --red:            #990000;
   --green:          #4d761d;
+  --blue:           #073763;
   --shadow:         rgba(15, 12, 6, 0.55);
 
   /* -- type ------------------------------------------------------------ */
@@ -25,6 +26,7 @@
   --font-head:    'Lexend', sans-serif;
   --font-display: 'Girassol', serif;
   --font-body:    'Libertinus Serif', 'Georgia', serif;
+  --font-head-fat: 'Alegreya Sans SC', sans-serif; /* extra-bold headlines, e.g. "A Call For An Encore" / "Warning!" */
 
   /* -- book geometry (JS + media queries adjust these) ----------------- */
   --book-w: min(96vw, 1500px);
@@ -302,14 +304,44 @@ body{
 }
 .leaf.is-flipping .leaf-face::before{ opacity: 1; }
 
-/* page content area */
+/* page content area - two columns by default, like a real printed page */
 .page-body{
   flex: 1;
   padding: 8% 9% 7%;
   overflow-y: auto;
+  column-count: 2;
+  column-gap: 2.6em;
+  column-rule: 1px solid var(--page-edge);
 }
 .page-body::-webkit-scrollbar{ width: 6px; }
 .page-body::-webkit-scrollbar-thumb{ background: var(--page-edge); border-radius: 4px; }
+
+/* elements that should never be sliced mid-column */
+.page-body p,
+.page-body ul,
+.page-body ol,
+.page-body li,
+.page-body img,
+.page-body .callout,
+.page-body .callout-warning,
+.page-body .handwritten{
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+/* headings / mastheads span both columns rather than sitting in one */
+.page-body .page-eyebrow,
+.page-body .page-title,
+.page-body .page-header{
+  column-span: all;
+  -webkit-column-span: all;
+}
+
+/* the Table of Contents keeps its own single-column masthead layout */
+#toc .page-body{
+  column-count: 1;
+  column-rule: none;
+}
 
 .page-foot{
   display: flex;
@@ -402,6 +434,71 @@ body{
   margin: 1em 0;
   font-size: clamp(0.88rem, 0.5vw + 0.62rem, 1.2rem);
   color: var(--ink-soft);
+}
+
+/* -- magazine-style header block: rule / big two-tone headline / subhead -- */
+
+.page-header{ margin: 0 0 1.2em; }
+.rule-heavy{
+  border: none;
+  border-top: 3px solid var(--ink);
+  margin: 0 0 0.55em;
+}
+.page-header .rule-heavy:last-child{ margin: 0.55em 0 0; }
+.page-headline{
+  font-family: var(--font-head-fat);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  font-size: clamp(1.7rem, 2.6vw + 1rem, 3rem);
+  color: var(--ink);
+  margin: 0.32em 0 0.12em;
+}
+.page-headline .accent{ color: var(--blue); }
+.page-subhead{
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(0.85rem, 0.5vw + 0.6rem, 1.15rem);
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.accent-red{
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* -- floating warning box (Alegreya Sans SC heading, gold frame) -- */
+
+.callout-warning{
+  float: right;
+  width: 100%;
+  margin: 0.2em 0 1em 1.6em;
+  padding: 1em 1.2em;
+  border: 3px solid var(--gold);
+  background: rgba(200,162,77,0.07);
+  text-align: center;
+}
+.callout-warning h3{
+  font-family: var(--font-head-fat);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: clamp(1.7rem, 2.6vw + 1rem, 3rem);
+  color: var(--red);
+  margin: 0 0 0.4em;
+}
+.callout-warning p{
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 0.55vw + 0.7rem, 1.35rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (max-width: 700px){
+  .callout-warning{ float: none; width: 100%; margin: 0 0 1em; }
 }
 
 /* -- table of contents page ------------------------------------------ */
@@ -624,7 +721,7 @@ body{
   .book-cover{ display: none; }
   .spine{ display: none; }
   .endpaper{ display: none; }
-  .page-body{ padding: 9% 8% 6%; }
+  .page-body{ padding: 9% 8% 6%; column-count: 1; column-rule: none; }
 }
 
 /* =========================================================================
