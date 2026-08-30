@@ -293,6 +293,15 @@ body{
 .leaf-front{ border-radius: 3px 6px 6px 3px; }
 .leaf-back{ transform: rotateY(180deg); border-radius: 6px 3px 3px 6px; }
 
+/* each .page fills its leaf-face and stacks body/foot vertically, so
+   .page-foot (page number + section label) is pinned to the bottom of
+   the leaf regardless of how much content .page-body actually has */
+.leaf-face .page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 /* curling sheen - brightens while a leaf is mid-turn */
 .leaf-face::before{
   content: "";
@@ -511,7 +520,7 @@ body{
   grid-template-columns: 1fr 2.1fr 1fr;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: clamp(22px, 4vh, 44px);
+  margin-bottom: clamp(20px, 2vh, 42px);
 }
 .toc-volume{ text-align: left; }
 .toc-masthead .toc-volume-label{
@@ -601,8 +610,8 @@ body{
 }
 
 .features-heading{
-  margin: 0 0 clamp(14px, 2.4vh, 26px);
-  padding-top: clamp(10px, 2vh, 20px);
+  margin: 0 0 clamp(8px, 1.4vh, 16px);
+  padding-top: clamp(6px, 1vh, 12px);
   border-top: 1px solid var(--page-edge);
   font-family: var(--font-head);
   font-weight: 700;
@@ -615,12 +624,12 @@ body{
 /* -- table of contents page: features list ------------------------------ */
 
 .toc-list{ list-style: none; margin: 0; padding: 0; }
-.toc-entry{ margin-bottom: clamp(10px, 1.7vh, 18px); cursor: pointer; }
+.toc-entry{ margin-bottom: clamp(6px, 1vh, 11px); cursor: pointer; }
 .toc-title{
   font-family: var(--font-display);
   font-variant: small-caps;
   font-weight: 700;
-  font-size: clamp(1rem, 0.65vw + 0.72rem, 1.5rem);
+  font-size: clamp(0.8rem, 0.63vw + 0.7rem, 1.3rem);
   color: var(--ink);
 }
 .toc-row{
