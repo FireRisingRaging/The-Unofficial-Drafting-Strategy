@@ -1,5 +1,5 @@
 /* =========================================================================
-   THE BOOK — stylesheet
+   THE BOOK - stylesheet
    Design tokens live at the top. Change these to re-theme the whole book.
    ========================================================================= */
 
@@ -51,7 +51,7 @@ body{
 }
 
 /* =========================================================================
-   STAGE — the room the book sits in
+   STAGE - the room the book sits in
    ========================================================================= */
 
 .stage{
@@ -291,7 +291,7 @@ body{
 .leaf-front{ border-radius: 3px 6px 6px 3px; }
 .leaf-back{ transform: rotateY(180deg); border-radius: 6px 3px 3px 6px; }
 
-/* curling sheen — brightens while a leaf is mid-turn */
+/* curling sheen - brightens while a leaf is mid-turn */
 .leaf-face::before{
   content: "";
   position: absolute; inset: 0;
@@ -325,7 +325,7 @@ body{
 .leaf-front .page-foot{ flex-direction: row-reverse; }
 
 /* =========================================================================
-   PAGE CONTENT TYPOGRAPHY  (used inside .page-body — this is what you'll
+   PAGE CONTENT TYPOGRAPHY  (used inside .page-body - this is what you'll
    reach for when writing new pages)
    ========================================================================= */
 
@@ -604,12 +604,12 @@ body{
 .arrow-btn.prev{ left: 18px; }
 .arrow-btn.next{ right: 18px; }
 
-@media (max-width: 640px){
+@media (max-width: 700px){
   .arrow-btn{ display: none; }
 }
 
 /* =========================================================================
-   RESPONSIVE — single-page mode on small screens
+   RESPONSIVE - single-page mode on small screens
    ========================================================================= */
 
 @media (max-width: 700px){
@@ -617,15 +617,66 @@ body{
     --book-w: min(96vw, 520px);
     --book-h: min(88vh, 900px);
   }
+  /* Mobile uses the single-page carousel built in script.js, not the
+     2-page leaf spread - hide every desktop-only decoration, including
+     both endpaper background plates (they're real swipeable pages now). */
   .leaf{ width: 100%; left: 0; right: 0; transform-origin: left center; }
-  .book-cover{ width: calc(100% + 6px); }
-  .book-cover.right{ display: none; }
+  .book-cover{ display: none; }
   .spine{ display: none; }
-  .endpaper.left{ width: 100%; }
-  .endpaper.right{ display: none; }
+  .endpaper{ display: none; }
   .page-body{ padding: 9% 8% 6%; }
+}
+
+/* =========================================================================
+   MOBILE CAROUSEL - single-page swipeable view, built by script.js only
+   when the viewport is narrow. Leaves the desktop leaf-flip book untouched.
+   ========================================================================= */
+
+.mobile-track{
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+}
+
+.mobile-slide{
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--parchment);
+  box-shadow: 0 14px 40px var(--shadow);
+  transition: transform 0.42s cubic-bezier(.32, .08, .24, 1);
+}
+.mobile-track.no-transition .mobile-slide{ transition: none; }
+
+.mobile-slide .page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cover-page-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 10%;
+}
+.cover-page-body img{
+  max-width: 72%;
+  height: auto;
+  display: block;
+  border: none;
+  border-radius: 0;
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce){
   .leaf{ transition: none; }
+  .mobile-slide{ transition: none; }
 }
