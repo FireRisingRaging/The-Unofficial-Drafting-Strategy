@@ -83,6 +83,14 @@
        .caption        small caption text under an image
        .divider        a thin horizontal rule
      Body paragraphs, lists and headings use Libertinus Serif automatically.
+
+     Pages are two columns by default. To force a break to the next column
+     at a specific point, drop in an empty tag:
+         <column-break></column-break>
+     Everything after it moves to the top of the next column. If a page
+     has more content than fits, it now scrolls vertically instead of
+     spilling into a hidden 3rd column - <column-break> is only for
+     intentional, controlled breaks.
      ========================================================================= -->
 <div id="content-source">
 
@@ -121,6 +129,7 @@
 
       <p>I <strong class="accent-red">LOVE</strong> reading Drafting Strategy: Architectural Digest. There has been five printed volumes of them so far by the Reddington Press, and all of them are bursting with passion for craftsmanship.</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, no new volumes has come out long since its string of initial publication in 1994, and there has been advancements to the drafting techniques since. Thus I would like to rectify that and publish this as an homage to the original series.</p>
+      <column-break></column-break>
       <p>In this extra-long issue of "UNOFFICIAL DRAFTING STRATEGY", I will bring a collection of important concepts, guidelines and ideas that has not yet been covered by the existing five volumes of Drafting Strategy: Architectural Digest.</p>
       <div class="callout-warning">
         <h3>Warning!</h3>

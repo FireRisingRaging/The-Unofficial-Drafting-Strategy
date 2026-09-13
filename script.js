@@ -49,6 +49,24 @@
   const totalPages = sourcePages.length;
   const totalLeaves = totalPages / 2;
 
+  // ---- 1b. Wrap each page's content in an inner .page-columns box. -------
+  // .page-body (see CSS) is the fixed-height, vertically-scrolling viewport.
+  // If its content were columned directly, overflow would spawn extra
+  // columns off to the side (a 3rd, 4th... column), which is what forced
+  // the old horizontal scroll. By moving the actual column-count layout
+  // onto this inner wrapper - which has no height of its own - overflow
+  // can only make the wrapper taller, so .page-body just scrolls down to
+  // reveal it instead. Skipped for the mobile cover pages (built later in
+  // buildCoverPage), which use a centered flex layout, not columns.
+  sourcePages.forEach((pageEl) => {
+    const body = pageEl.querySelector(":scope > .page-body");
+    if (!body || body.classList.contains("cover-page-body")) return;
+    const inner = document.createElement("div");
+    inner.className = "page-columns";
+    while (body.firstChild) inner.appendChild(body.firstChild);
+    body.appendChild(inner);
+  });
+
   // ---- 2. Auto-number every page and tag TOC entries (shared by both
   //         rendering modes - done once, regardless of which mode runs). --
   const tocEntries = [];
@@ -393,6 +411,34 @@
   function next() { if (mode === "mobile") nextMobile(); else nextDesktop(); }
   function prev() { if (mode === "mobile") prevMobile(); else prevDesktop(); }
 
+  // The one or two .page-body elements actually visible right now (mobile:
+  // the current slide; desktop: the front face still showing on the right,
+  // plus the back face of the leaf just turned, showing on the left).
+  function getVisiblePageBodies() {
+    if (mode === "mobile") {
+      const slide = slideEls[mobileIndex];
+      return slide ? Array.from(slide.querySelectorAll(".page-body")) : [];
+    }
+    const bodies = [];
+    if (currentLeaf < leaves.length) {
+      const rightBody = leaves[currentLeaf].querySelector(".leaf-front .page-body");
+      if (rightBody) bodies.push(rightBody);
+    }
+    if (currentLeaf > 0) {
+      const leftBody = leaves[currentLeaf - 1].querySelector(".leaf-back .page-body");
+      if (leftBody) bodies.push(leftBody);
+    }
+    return bodies;
+  }
+
+  // Scrolls whichever page(s) are currently visible - direction 1 = down,
+  // -1 = up - by roughly three quarters of a page at a time.
+  function scrollVisiblePages(direction) {
+    getVisiblePageBodies().forEach((body) => {
+      body.scrollBy({ top: direction * Math.round(body.clientHeight * 0.75), behavior: "smooth" });
+    });
+  }
+
   // ---- 7. Input: click-to-turn (desktop), arrows, wheel, keyboard ---------
   bookEl.addEventListener("click", (e) => {
     if (mode === "mobile") return; // mobile navigates by swipe, not click
@@ -409,11 +455,26 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowUp") { scrollVisiblePages(-1); e.preventDefault(); }
+    if (e.key === "ArrowDown") { scrollVisiblePages(1); e.preventDefault(); }
   });
 
   let wheelLock = false;
   stageEl.addEventListener("wheel", (e) => {
     if (mode === "mobile") return;
+
+    // If the wheel is happening over a page whose text is taller than the
+    // page, let the browser scroll that text natively first - only flip
+    // to the next/previous page once it's already scrolled all the way
+    // to the bottom/top in the direction the wheel is going.
+    const body = e.target.closest ? e.target.closest(".page-body") : null;
+    if (body) {
+      const canScrollDown = body.scrollTop + body.clientHeight < body.scrollHeight - 1;
+      const canScrollUp = body.scrollTop > 0;
+      if (e.deltaY > 0 && canScrollDown) return;
+      if (e.deltaY < 0 && canScrollUp) return;
+    }
+
     if (wheelLock) return;
     if (Math.abs(e.deltaY) < 12) return;
     wheelLock = true;
